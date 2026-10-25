@@ -5,6 +5,7 @@ const cors = require("cors");
 const connectDB = require("./config/db");
 const { notFound, errorHandler } = require("./middleware/ErrorHandler");
 
+
 const app = express();
 
 app.use(cors());

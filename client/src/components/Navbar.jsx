@@ -2,7 +2,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const navigate = useNavigate();
-  useLocation(); // re-render on route change so auth links update
+  useLocation();
   const loggedIn = !!localStorage.getItem("token");
 
   const logout = () => {

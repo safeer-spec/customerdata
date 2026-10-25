@@ -21,6 +21,7 @@ export default function Register() {
         { name: "name", label: "Name", type: "text" },
         { name: "email", label: "Email", type: "email" },
         { name: "password", label: "Password", type: "password" },
+        { name: "confirmpassword", label: "Confirm Password", type: "password" },
       ]}
       footer={{ text: "Already have an account?", to: "/login", link: "Login" }}
     />

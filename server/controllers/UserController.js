@@ -3,23 +3,27 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/UserModel");
 
 const signToken = (id) =>
-  jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN || "7d" });
+  jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN || "7d",
+  });
 
 
 exports.register = async (req, res, next) => {
   try {
-    const { name, email, password ,confirmpassword } = req.body;
+    const { name, email, password, confirmpassword } = req.body;
 
-     if (!password || password !== confirmpassword) {
+    if (!password || password !== confirmpassword) {
       return res.status(400).json({ message: "Passwords do not match" });
     }
-
 
     if (await User.findOne({ email })) {
       return res.status(409).json({ message: "Email already registered" });
     }
+
     const hashed = await bcrypt.hash(password, 10);
-    const user = await User.create({ name, email, password: hashed, confirmpassword});
+    // confirmpassword is only for checking, so it is not saved
+    const user = await User.create({ name, email, password: hashed });
+
     res.status(201).json({
       token: signToken(user._id),
       user: { id: user._id, name: user.name, email: user.email },
@@ -28,7 +32,6 @@ exports.register = async (req, res, next) => {
     next(err);
   }
 };
-
 
 exports.login = async (req, res, next) => {
   try {
