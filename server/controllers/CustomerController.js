@@ -13,7 +13,7 @@ exports.getCustomers = async (req, res, next) => {
 
 exports.addCustomer = async (req, res, next) => {
   try {
-    const { name, email, phone, company, status } = req.body;
+    const { name, email, phone, company} = req.body;
     const customer = await Customer.create({
       name, email, phone, company, createdBy: req.user._id,
     });
@@ -26,10 +26,10 @@ exports.addCustomer = async (req, res, next) => {
 
 exports.updateCustomer = async (req, res, next) => {
   try {
-    const { name, email, phone, company, status } = req.body;
+    const { name, email, phone, company } = req.body;
     const customer = await Customer.findOneAndUpdate(
       { _id: req.params.id, createdBy: req.user._id },
-      { name, email, phone, company },
+      { name, email, phone, company }
     );
     if (!customer) return res.status(404).json({ message: "Customer not found" });
     res.json(customer);

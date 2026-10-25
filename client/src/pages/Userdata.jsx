@@ -80,8 +80,6 @@ export default function Userdata() {
               <th className="p-3">Email</th>
               <th className="p-3">Phone</th>
               <th className="p-3">Company</th>
-              <th className="p-3">Status</th>
-              <th className="p-3 text-right">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -94,9 +92,6 @@ export default function Userdata() {
                 <td className="p-3">{c.email}</td>
                 <td className="p-3">{c.phone || "-"}</td>
                 <td className="p-3">{c.company || "-"}</td>
-                <td className="p-3">
-                  <span className={`rounded-full px-2 py-1 text-xs ${badge[c.status]}`}>{c.status}</span>
-                </td>
                 <td className="space-x-2 p-3 text-right">
                   <button onClick={() => { setEditing(c); window.scrollTo({ top: 0, behavior: "smooth" }); }} className="text-indigo-600 hover:underline">Edit</button>
                   <button onClick={() => remove(c._id)} className="text-red-600 hover:underline">Delete</button>
