@@ -56,11 +56,6 @@ export default function CustomerForm({ editing, onSave, onCancel }) {
           {errors.phone && <p className="text-xs text-red-600">{errors.phone}</p>}
         </div>
         <input placeholder="Company" value={values.company} onChange={set("company")} className={input} />
-        <select value={values.status} onChange={set("status")} className={input}>
-          <option value="lead">Lead</option>
-          <option value="active">Active</option>
-          <option value="inactive">Inactive</option>
-        </select>
       </div>
       <div className="mt-4 flex gap-2">
         <button className="rounded bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-700">
