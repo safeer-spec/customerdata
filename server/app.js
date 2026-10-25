@@ -10,14 +10,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
 app.use(async (req, res, next) => {
   try {
     await connectDB();
     next();
   } catch (err) {
     console.error("MongoDB connection failed:", err.message);
-    res.status(500).json({ message: "Database connection failed" });
+    res.status(500).json({ message: "DB error: " + err.message });
   }
 });
 
@@ -29,7 +28,6 @@ app.use(notFound);
 app.use(errorHandler);
 
 module.exports = app;
-
 
 if (require.main === module) {
   const PORT = process.env.PORT || 7000;
